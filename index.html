@@ -32,226 +32,110 @@
 
     <div id="exerciseDescription" class="alert alert-info">Odaberi zadatak kako bi pročitao opis zadatka i krenuo sa izradom rješenja.</div>
 
-    <label for="codeEditor" class="form-label">Napiši svoj C++ Code:</label>
-    <textarea id="codeEditor" class="form-control" rows="13" placeholder="// U ovom polju piši svoj code za zadatak" value="">
-    #include <iostream>
-    using namespace std;
-
-        int main() {
-           
-           // VAMO PIŠI SVOJ CODE NE BRIŠI DIO IZNAD ILI ISPOD
-
-           return 0;
-        }
-    </textarea>
-
-    <label for="inputField" class="form-label">Input za program (ako ostaviš prazno uzima se da je input broj 0):</label> 
-    <input type="text" id="inputField" class="form-control" placeholder="Unesi svoj input za testiranje code-a">
-
+    <iframe src="https://onecompiler.com/cpp" width="100%" height="600px"></iframe>
+    
     <div class="d-flex justify-content-between mt-3">
-      <button class="btn btn-primary" onclick="runCode()">Pokreni Code</button>
-      <button class="btn btn-success" onclick="runTests()">Pokreni Autotestove</button>
+      <button class="btn btn-success" onclick="runExample()">Primjeri ispisa</button>
     </div>
 
-    <div id="output" class="mt-3 alert alert-secondary" style="white-space: pre-wrap;">Output će biti prikazan u ovom polju...</div>
+    <div id="output" class="mt-3 alert alert-secondary" style="white-space: pre-line;"></div>
   </div>
 
   <script>
     const exercises = {
       1: {
         description: 'Korisnik unosi broj n i ispisuju se svi prosti brojevi manji ili jednaki od n.',
-        sampleInput: ["2 5", "10 4", "3 12", "12 10", "50 40"],
-        expectedOutput: ["Zapremina valjka sa poluprečnikom 2 i dužinom visine 5 je 62.8", "Zapremina valjka sa poluprečnikom 10 i dužinom visine 4 je 1256", "Zapremina valjka sa poluprečnikom 3 i dužinom visine 12 je 339.12", "Zapremina valjka sa poluprečnikom 12 i dužinom visine 10 je 4521.6", "Zapremina valjka sa poluprečnikom 50 i dužinom visine 40 je 314000"]
+        sampleInput: ["4", "7", "12", "1210", "37"],
+        expectedOutput: ["Broj nije prost", "Broj je prost", "Broj nije prost", "Broj nije prost", "Broj je prost"]
       },
       2: {
         description: 'Korisnik unosi decimalni broj koji predstavlja iznos u dolarima, program ga konvertuje u cente i ispisuje najmanji broj kovanicama potreban za taj iznos. (NPR. ako unese 2.81 to je 281 centi i to su 5 kovanica po 50centi, jedna kovanica od 25centi, jedna kovanica od 5centi i jedna kovanica od 1cent, program ce ispisati broj 8 jer je 5+1+1+1=8).',
-        sampleInput: ["4 5", "2 10", "10 5", "8 12", "50 43"],
-        expectedOutput: ["Zapremina trostrane piramide dužine stranice 4 i dužine visine 5 je 46.188", "Zapremina trostrane piramide dužine stranice 2 i dužine visine 10 je 11.547", "Zapremina trostrane piramide dužine stranice 10 i dužine visine 5 je 721.688", "Zapremina trostrane piramide dužine stranice 8 i dužine visine 12 je 886.81", "Zapremina trostrane piramide dužine stranice 50 i dužine visine 43 je 775814"]
+        sampleInput: ["2.81", "3.81", "3.85", "3.5", "0.04"],
+        expectedOutput: ["8", "12", "8", "14", "4"]
       },
       3: {
         description: 'Korisnik unosi brojeve sve dok ne unese nulu. Nakon što unese nulu ispiše se najveći broj što je korisnik unijeo.',
-        sampleInput: ["10 9 5", "2 3 6", "100 140 70", "25 19 17", "2 7 13"],
-        expectedOutput: ["Dužine dijagonale d i D kvadra dužina stranica 10 9 5 su 13.4536 14.3527", "Dužine dijagonale d i D kvadra dužina stranica 2 3 6 su 3.60555 7", "Dužine dijagonale d i D kvadra dužina stranica 100 140 70 su 172.047 185.742", "Dužine dijagonale d i D kvadra dužina stranica 25 19 17 su 31.4006 35.7071", "Dužine dijagonale d i D kvadra dužina stranica 2 7 13 su 7.28011 14.8997"]
+        sampleInput: ["10 9 5 0", "2 3 6 0", "100 140 70 0", "25 190 17", "2 7 13"],
+        expectedOutput: ["10", "6", "100", "190", "13"]
       },
       4: {
         description: 'Korisnik unosi brojeve sve dok ne unese nulu. Nakon što unese nulu ispiše zbir svih brojeva što je korisnik unijeo.',
-        sampleInput: ["2 10 14", "10 10 10", "29 30 50", "70 30 100", "150 110 120"],
+        sampleInput: ["2 10 14 0", "10 10 10 0", "29 30 50 0", "70 30 100 0", "150 110 120 0"],
         expectedOutput: ["26", "30", "109", "200", "380"]
       },
       5: {
         description: 'Korisnik unosi broj n, nakon cega unosi n brojeva od 1 do 5. Program ispisuje zakljucnu ocjenu na osnovu n unesenih ocjena.',
-        sampleInput: ["3 5", "10 10", "100 15", "70 10", "100 110"],
-        expectedOutput: ["Površina trougla čije su stranice duge 3 5 je 7.5", "Površina trougla čije su stranice duge 10 10 je 50", "Površina trougla čije su stranice duge 100 15 je 750", "Površina trougla čije su stranice duge 70 10 je 350", "Površina trougla čije su stranice duge 100 110 je 5500"]
+        sampleInput: ["2 3 5", "3 4 4 4", "5 1 1 2 2 1", "4 1 3 2 2", " 3 3 3 3"],
+        expectedOutput: ["4", "4", "1.4", "2", "3"]
       },
       6: {
         description: 'Korisnik unosi brojeve m i n (m < n), nakon čega se unosi n brojeva, ispisuje se zbir prvih m brojeva minus zbir ostalih brojeva.',
-        sampleInput: ["5", "3", "10", "155", "1700"],
-        expectedOutput: ["Površina pravilnog šestougla dužine stranice 5 je 64.9519", "Površina pravilnog šestougla dužine stranice 3 je 23.3827", "Površina pravilnog šestougla dužine stranice 10 je 259.808", "Površina pravilnog šestougla dužine stranice 155 je 62418.8", "Površina pravilnog šestougla dužine stranice 1700 je 7.50844e+06"]
+        sampleInput: ["10 7 1 1 1 1 1 1 1 3 3 3"],
+        expectedOutput: ["2"]
       },
       7: {
         description: 'Korisnik unosi brojeve ai, ispisuje koliko je a1-a2+a3-a4+...-an.',
-        sampleInput: ["7 1", "1 10", "10 -2", "0.2 0.1", "-0.7 0.3"],
-        expectedOutput: ["z = 19", "z = -17", "z = 34", "z = 0.4", "z = -2.7"]
+        sampleInput: ["7 1 2 1 2 1 2 1"],
+        expectedOutput: ["-2"]
       },
       8: {
         description: 'Napisati program koji na osnovu učitanog rastojanja između dva grada, brzine automobila koji kreće iz prvog grada i brzine automobila koji kreće iz drugog grada izračuna vrijeme koje će proteći do susreta i puteve koje će preći svaki od ovih automobila.',
-        sampleInput: ["0", "5", "-4", "-100", "12"],
-        expectedOutput: ["y = 1", "y = 536", "y = -67", "y = -2.9297e+06", "y = 6157"]
+        sampleInput: ["150 50 50"],
+        expectedOutput: ["1.5 75 75"]
       },
       9: {
-        description: 'Napisati program koji pomaže kasirki da vrati kusur na osnovu cene i količine kupljenog artikla i količine novca koju je kupac dao (ovde se pretpostavlja da je kupljena samo jedna vrsta proizvoda). Kao rezultat treba ispisati koliki kusur treba da vrati kasirka.',
-        sampleInput: ["1", "10"],
-        expectedOutput: ["1", "10"]
+        description: 'Napisati program koji pomaže kasirki da vrati kusur na osnovu cijene i količine kupljenog artikla i količine novca koju je kupac dao (pretpostavlja se da je kupljena samo jedna vrsta proizvoda). Kao rezultat treba ispisati koliki kusur treba da vrati kasirka.',
+        sampleInput: ["5.8 10", "10 100"],
+        expectedOutput: ["4.2", "90"]
       },
       10: {
         description: 'Učitati riječ sa tastature. Ispisati je onoliko puta koliko ima slova.',
-        sampleInput: ["10", "100"],
-        expectedOutput: ["10", "100"]
+        sampleInput: ["Patka", "Miš"],
+        expectedOutput: ["Patka Patka Patka Patka Patka", "Miš Miš Miš"]
       },
       11: {
         description: 'Generiši string dužine koju korisnik unosi i sastoji se od nasumično odabranih slova iz skupa {A, T, G, C}.',
-        sampleInput: ["-20", "20"],
-        expectedOutput: ["-20", "20"]
+        sampleInput: ["4", "7"],
+        expectedOutput: ["ATTT", "AGCCTTA"]
       },
       12: {
         description: 'Korisnik unosi n brojeva, nakon sto unese sve brojeve ispisuju se svi prosti brojevi od prvog do zadnjeg.',
-        sampleInput: ["7 1", "1 10", "10 -2", "0.2 0.1", "-0.7 0.3"],
-        expectedOutput: ["z = 19", "z = -17", "z = 34", "z = 0.4", "z = -2.7"]
+        sampleInput: ["7 3 4 50 10 7 13"],
+        expectedOutput: ["3 7 13"]
       },
       13: {
         description: 'Korisnik unosi n brojeva, nakon sto unese sve brojeve ispisuju se zadnji prosti broj koji je unesen.',
-        sampleInput: ["0", "5", "-4", "-100", "12"],
-        expectedOutput: ["y = 1", "y = 536", "y = -67", "y = -2.9297e+06", "y = 6157"]
+        sampleInput: ["7 1 3 2 4 10 7 13"],
+        expectedOutput: ["13"]
       },
       14: {
         description: 'Korisnik unosi brojeve sve dok ne unese nulu. Nakon što unese nulu ispiše se najveći broj što je korisnik unijeo.',
-        sampleInput: ["1", "10"],
-        expectedOutput: ["1", "10"]
+        sampleInput: ["1 10 23 40 -120 24 200 0"],
+        expectedOutput: ["200"]
       },
       15: {
         description: 'Napiši program koji unosi riječ i ispisuje koliko puta se u njoj javlja samoglasnik a.',
-        sampleInput: ["10", "100"],
-        expectedOutput: ["10", "100"]
+        sampleInput: ["Patka", "Nutella"],
+        expectedOutput: ["Patka Patka", "Nutella"]
       },
       16: {
         description: 'Napiši program koji unosi jednu riječ i provijerava je li ona palindrom ili ne.',
-        sampleInput: ["-20", "20"],
-        expectedOutput: ["-20", "20"]
+        sampleInput: ["Patka", "Ana"],
+        expectedOutput: ["Nije palindrom", "Jest palindrom"]
       }
     };
 
-    async function runCode() {
-      const code = document.getElementById('codeEditor').value;
-      const selectedExercise = document.getElementById('exerciseSelector').value;
-      let input = document.getElementById('inputField').value;
-      if (input === "") {
-        input = "0";
-      }
-      const outputElement = document.getElementById('output');
-
-      const data = new URLSearchParams({
-        code: code, 
-        language: 'cpp',
-        input: input,
-      });
-
-      const config = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: data
-      };
-
-      outputElement.textContent = "Code se pokreće...";
-
-      try {
-        const response = await fetch('https://api.codex.jaagrav.in', config);
-        const result = await response.json();
-        console.log(result.output);
-
-        if (result.output) {
-          outputElement.textContent = result.output;
-        } else {
-          outputElement.textContent = "Error: " + (result.error || "Nepoznati error se desio.");
+function runExample() {
+      const selectedValue = document.getElementById("exerciseSelector").value;
+      const exercise = exercises[selectedValue];
+      if (exercise) {
+        let outputText = "";
+        for (let i = 0; i < exercise.sampleInput.length; i++) {
+          outputText += `Za input ${exercise.sampleInput[i]} output je ${exercise.expectedOutput[i]}\n\n`;
         }
-      } catch (error) {
-        outputElement.textContent = "Error: " + error.message;
-      }
-    }
-
-    async function runTests() {
-  const selectedExercise = document.getElementById('exerciseSelector').value;
-  const exercise = exercises[selectedExercise];
-  const outputElement = document.getElementById('output');
-
-  let testResults = [];
-  let allTestsPassed = true;
-
-  // Loop through the sample inputs
-  for (let i = 0; i < exercise.sampleInput.length; i++) {
-    const input = exercise.sampleInput[i];
-
-    // Run the code with the current input
-    const result = await runCodeWithInput(input);
-
-    if (selectedExercise == 9 || selectedExercise == 10 || selectedExercise == 11) {
-      // For tasks with random numbers, validate the range
-      const numbers = result.trim().split(" ").map(Number);
-
-      const [minRange, maxRange] = exercise.expectedOutput.map(Number);
-      console.log(minRange, maxRange);
-      const inRange = numbers.every(num => num >= minRange && num <= maxRange);
-
-      if (inRange) {
-        testResults.push(`Test ${i + 1}: Prošao (Svi brojevi su u opsegu)`);
+        document.getElementById("output").innerText = outputText.trim();
       } else {
-        testResults.push(`Test ${i + 1}: Pao (Brojevi nisu u opsegu: "${result.trim()}")`);
-        allTestsPassed = false;
-      }
-    } else {
-      // Standard comparison for fixed expected outputs
-      const expected = exercise.expectedOutput[i];
-      if (result.trim() === expected.trim()) {
-        testResults.push(`Test ${i + 1}: Prošao`);
-      } else {
-        testResults.push(`Test ${i + 1}: Pao (Očekivani output: "${expected}", Stvarni output tvog programa: "${result}")`);
-        allTestsPassed = false;
-      }
-    }
-  }
-
-  // Display the results
-  if (allTestsPassed) {
-    outputElement.textContent = "Svi testovi su uspješno završeni!";
-  } else {
-    outputElement.textContent = testResults.join("\n");
-  }
-}
-
-
-    async function runCodeWithInput(input) {
-      const code = document.getElementById('codeEditor').value;
-      const data = new URLSearchParams({
-        code: code, 
-        language: 'cpp',
-        input: input,
-      });
-
-      const config = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: data
-      };
-
-      try {
-        const response = await fetch('https://api.codex.jaagrav.in', config);
-        const result = await response.json();
-        return result.output || "Error: " + (result.error || "Nepoznati error se desio.");
-      } catch (error) {
-        return "Error: " + error.message;
+        document.getElementById("output").innerText = "Molimo odaberite zadatak.";
       }
     }
 
@@ -259,10 +143,7 @@
       const selectedExercise = document.getElementById('exerciseSelector').value;
       const exercise = exercises[selectedExercise];
       document.getElementById('exerciseDescription').textContent = exercise.description;
-      document.getElementById('output').textContent = "Output će biti prikazan u ovom polju..."
     }
-
-    loadExercise();
   </script>
 </body>
 </html>
